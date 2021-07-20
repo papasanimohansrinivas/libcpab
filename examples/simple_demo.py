@@ -6,6 +6,13 @@ Created on Thu Aug  8 15:29:26 2019
 """
 
 #%%
+import sys
+import os
+
+PACKAGE_PARENT = '..'
+SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
+sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
+
 from libcpab import Cpab
 from libcpab.core.utility import show_images, get_dir # utility functions
 
