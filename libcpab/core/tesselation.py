@@ -76,7 +76,7 @@ class Tesselation(object):
             time_3 = time.time()
             self.find_shared_verts()
             time_4 = time.time()
-            print("shared verts ",time_4-time3)
+            print("shared verts ",time_4-time_3)
             
             # find auxility vertices, if transformation is valid outside
             if not zero_boundary: self.find_verts_outside()
