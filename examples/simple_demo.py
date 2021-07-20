@@ -46,7 +46,7 @@ if __name__ == "__main__":
     N = 9
     
     # Load some data
-    data = plt.imread(get_dir(__file__) + '/../data/cat.jpg') / 255
+    data = plt.imread(get_dir(__file__) + '/../data/cat.jpg') 
     data = np.tile(data[None], [N,1,1,1]) # create batch of data
     
     # Create transformer class
@@ -72,8 +72,8 @@ if __name__ == "__main__":
     print(len(t_data))
     counter_ = 1
     for data_ in t_data:
-        succ = cv2.imwrite("output_{}.png".format(counter_),data_)
+        succ = cv2.imwrite("output2_{}.png".format(counter_),data_)
         print(succ)
         counter_+=1
     # Show transformed samples
-    show_images(t_data)
+#     show_images(t_data)
