@@ -8,6 +8,7 @@ Created on Sun Nov 18 14:23:25 2018
 #%%
 import numpy as np
 from .utility import make_hashable, check_if_file_exist, null, save_obj, load_obj
+import time 
 
 #%%
 class Tesselation(object):
@@ -67,35 +68,59 @@ class Tesselation(object):
         # Check if file exist else calculate the basis
         if not check_if_file_exist(self._basis_file+'.pkl') or override:
             # Get vertices
+            time_1 = time.time()
             self.find_verts()
-            
+            time_2 = time.time()
+            print("fine verts ",time_2-time_1)
             # Find shared vertices
+            time_3 = time.time()
             self.find_shared_verts()
+            time_4 = time.time()
+            print("shared verts ",time_4-time3)
             
             # find auxility vertices, if transformation is valid outside
             if not zero_boundary: self.find_verts_outside()
             
             # Get continuity constrains
+            time_5 = time.time()
+
             self.L = self.create_continuity_constrains()
+            time_6 = time.time()
+            print("create continuity constrains",time_6-time_5)
             
             # If zero boundary, add constrains
+            time_7 = time.time()
             if zero_boundary:
                 temp = self.create_zero_boundary_constrains()
                 self.L = np.concatenate((self.L, temp), axis=0)
-                
+            time_8 = time.time()
+            print("zero boundary if ",time_8-time_7)
             # If volume perservation, add constrains
             if volume_perservation:
                 temp = self.create_zero_trace_constrains()
                 self.L = np.concatenate((self.L, temp), axis=0)
             
             # Find null space
+            time_9  = time.time()
+
             self.B = null(self.L)
-        
+            
+            time_10 = time.time()
+            print("B ",time_10-time_9)
             # Save to file
+            time_11 = time.time()
+
             save_obj(self.__dict__, self._basis_file)
+
+            time_12 = time.time()
+            print("saving pkl file",time_12-time_11)
         
         else:
+            time_13 = time.time()
             self.__dict__ = load_obj(self._basis_file)
+            time_14 = time.time()
+
+            print("loading pkl file",time_14-time_13)
     
     def get_cell_centers(self):
         """ Get the centers of all the cells """
