@@ -119,6 +119,7 @@ def show_images(images, cols='auto', title=None, scaling=False):
         a.set_yticklabels([])
     if scaling: fig.set_size_inches(np.array(fig.get_size_inches()) * n_images)
     fig.subplots_adjust(wspace=0, hspace=0)
+    fig.savefig("cpab_output.png")
     plt.tight_layout()
     plt.show()
 
