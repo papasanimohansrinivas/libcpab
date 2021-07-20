@@ -19,6 +19,7 @@ from libcpab.core.utility import show_images, get_dir # utility functions
 import numpy as np
 import matplotlib.pyplot as plt
 import argparse
+import cv2
 
 #%%
 def argparser():
@@ -68,6 +69,11 @@ if __name__ == "__main__":
     # Get the corresponding numpy arrays in correct format
     t_data = t_data.permute(0,2,3,1) if args.backend=='pytorch' else t_data
     t_data = T.backend.tonumpy(t_data)
-    
+    print(len(t_data))
+    counter_ = 1
+    for data_ in t_data:
+        succ = cv2.imwrite("output_{}.png".format(counter_),data_)
+        print(succ)
+        counter_+=1
     # Show transformed samples
     show_images(t_data)
