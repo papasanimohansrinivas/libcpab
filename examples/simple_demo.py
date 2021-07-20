@@ -63,6 +63,8 @@ if __name__ == "__main__":
     # Sample random transformation
     time5  = time.time()
     theta  = T.sample_transformation(N)
+    print(type(theta))
+    print(theta)
     time6  = time.time()
     print("--- getting sample transformation ",time6-time5)
 
